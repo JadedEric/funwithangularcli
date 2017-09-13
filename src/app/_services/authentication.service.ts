@@ -3,7 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Login } from '../login';
+import { login } from '../login';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,20 +11,17 @@ export class AuthenticationService {
     constructor(private http: Http) {
     }
 
-    login(login: Login) {
-        return this.http.post('http://staging.tangent.tngnt.co/api-token-auth/', {
-            username: login.username,
-            password: login.password
-        }).map((response: Response) => {
-            let user = response.json();
+    login(login: login) {
+        return this.http.post('http://staging.tangent.tngnt.co/api-token-auth/', login).map((response: Response) => {
+            let auth = response.json();
 
-            if (user && user.token) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
+            if (auth && auth.token) {
+                localStorage.setItem('authentication', JSON.stringify(auth));
             }
         });
     }
 
     logout() {
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('authentication');
     }
 }

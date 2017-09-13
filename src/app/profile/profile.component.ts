@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user';
+import { user } from '../user';
+import { authentication } from '../authentication';
 import { UserService } from '../_services/index';
 
 @Component({
@@ -10,11 +11,11 @@ import { UserService } from '../_services/index';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-    currentUser: User;
-    user: User;
+    auth: authentication = new authentication();
+    model: user = new user();
 
     constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.auth = JSON.parse(localStorage.getItem('authentication'));
     }
 
     ngOnInit() {
@@ -22,9 +23,8 @@ export class ProfileComponent implements OnInit {
     }
 
     private me() {
-        this.userService.me().subscribe(me => {
-            debugger;
-            this.user = me;
+        this.userService.me().subscribe(output => {
+            this.model = output;
         });
     }
 }

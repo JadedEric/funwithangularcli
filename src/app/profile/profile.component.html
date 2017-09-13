@@ -1,1 +1,26 @@
-My name is {{user?.first_name}} {{user?.last_name}}
+<p>
+  Your detail, as captured on the system:
+</p>
+<p>
+  <strong>Username:</strong> {{model?.username}}
+</p>
+<p>
+  <strong>Email Address:</strong> {{model?.email}}
+</p>
+<p>
+  <strong>First Name:</strong> {{model?.first_name}}
+</p>
+<p>
+  <strong>Last Name:</strong> {{model?.last_name}}
+</p>
+<p>
+  <strong>Is Active:</strong> {{model?.is_active}}
+</p>
+<p>
+  <strong>Is Staff:</strong> {{model?.is_staff}}
+</p>
+<p>
+  <strong>Is SuperUser:</strong> {{model?.is_superuser}}
+</p>
+
+<a [routerLink]="['/']">Go Home</a>

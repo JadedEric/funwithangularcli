@@ -3,9 +3,8 @@
     "",
     "\\e2e",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\_services"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\_services\\alert.service.ts",
+  "SelectedNode": "\\src\\app\\user.ts",
   "PreviewInSolutionExplorer": false
 }
