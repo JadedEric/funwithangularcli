@@ -3,8 +3,6 @@ import { Http, HttpModule, XHRBackend, ResponseOptions, Response, BaseRequestOpt
 import { async, inject, TestBed } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 
-import { User } from '../user';
-
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -22,6 +20,10 @@ describe('UserService', () => {
                     deps: [MockBackend, BaseRequestOptions]
                 }]
         });
+    });
+
+    afterEach(() => {
+        localStorage.removeItem("authentication");
     });
 
     it('should be created', inject([UserService], (service: UserService) => {
@@ -67,7 +69,31 @@ describe('UserService', () => {
             })))
         });
 
-        service.all().subscribe((resp) => {
+        service.me().subscribe((resp) => {
+            expect(resp.id).toBe(12);
+            expect(resp.username).toBe('user.person');
+        });
+    })));
+
+    it('should retrieve employee details for id \'12\'', async(inject([UserService, MockBackend], (service: UserService, backend: MockBackend) => {
+        let me = {
+            email: 'user@somewhere.com',
+            first_name: 'User',
+            id: 12,
+            is_active: true,
+            is_staff: true,
+            is_superuser: false,
+            last_name: 'Person',
+            username: 'user.person'
+        };
+
+        backend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(me)
+            })))
+        });
+
+        service.byid(12).subscribe((resp) => {
             expect(resp.id).toBe(12);
             expect(resp.username).toBe('user.person');
         });
