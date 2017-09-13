@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService, AuthenticationService } from '../_services/index';
-import { Login } from '../login';
+import { login } from '../login';
 
 @Component({
     moduleId: module.id,
@@ -12,7 +12,7 @@ import { Login } from '../login';
 })
 
 export class LoginComponent implements OnInit {
-    model: Login = {};
+    model: login = new login();
     loading: boolean = false;
     returnUrl: string;
 

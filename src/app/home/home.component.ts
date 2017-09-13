@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user';
+import { authentication } from '../authentication';
+import { employee } from '../employee';
+import { user } from '../user';
 import { UserService } from '../_services/index';
 
 @Component({
@@ -11,20 +13,28 @@ import { UserService } from '../_services/index';
 })
 
 export class HomeComponent implements OnInit {
-    currentUser: User;
-    users: User[] = [];
+    auth: authentication = new authentication();
+    employees: employee[] = [];
+    loggedin: user = new user();
 
     constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.auth = JSON.parse(localStorage.getItem('authentication'));
     }
 
     ngOnInit() {
         this.all();
+        this.me();
+    }
+
+    private me() {
+        this.userService.me().subscribe(output => {
+            this.loggedin = output;
+        });
     }
 
     private all() {
-        this.userService.all().subscribe(users => {
-            this.users = users
+        this.userService.all().subscribe(output => {
+            this.employees = output
         });
     }
 }

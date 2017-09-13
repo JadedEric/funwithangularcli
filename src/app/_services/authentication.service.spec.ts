@@ -5,7 +5,7 @@ import { MockBackend } from '@angular/http/testing';
 
 import { AuthenticationService } from './authentication.service';
 
-import { Login } from '../login';
+import { login } from '../login';
 
 describe('AuthenticationService', () => {
     beforeEach(() => {
@@ -30,9 +30,9 @@ describe('AuthenticationService', () => {
 
     it('should successfully log in', async(inject([AuthenticationService, MockBackend], (service: AuthenticationService, backend: MockBackend) => {
 
-        let login: Login = new Login();
-        login.password = "pravin.gordhan";
-        login.username = "pravin.gordhan";
+        let auth: login = new login();
+        auth.password = "pravin.gordhan";
+        auth.username = "pravin.gordhan";
 
         const mockResponse = {
             token: "secretkey"
@@ -45,10 +45,10 @@ describe('AuthenticationService', () => {
         });
 
         // test a log in, by mocking the backend call
-        service.login(login).subscribe((resp) => {
+        service.login(auth).subscribe((resp) => {
 
             // a successful log in will produce a window.localStorage variable, called currentUser
-            let ls: string = localStorage.getItem("currentUser");
+            let ls: string = localStorage.getItem("authentication");
             expect(ls).toBeDefined();
         });
 
@@ -56,7 +56,7 @@ describe('AuthenticationService', () => {
         service.logout();
 
         // a log out will remove the window.localStorage variable, called currentUser
-        let ls: string = localStorage.getItem("currentUser");
+        let ls: string = localStorage.getItem("authentication");
         expect(ls).toBeNull();
 
     })));

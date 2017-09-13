@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { User } from '../user';
-
 @Injectable()
 export class UserService {
 
@@ -21,12 +19,12 @@ export class UserService {
     }
 
     private jwt() {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
+        let auth = JSON.parse(localStorage.getItem('authentication'));
+        if (auth && auth.token) {
             let headers = new Headers({
                 'Content-Type': 'application/json'
             });
-            headers.append('Authorization', 'Token ' + currentUser.token);
+            headers.append('Authorization', 'Token ' + auth.token);
             return new RequestOptions({ headers: headers });
         }
     }
