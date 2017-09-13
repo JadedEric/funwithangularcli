@@ -11,7 +11,7 @@ export class UserService {
     }
 
     byid(id: number) {
-        return this.http.get('%url' + id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get('http://staging.tangent.tngnt.co/api/employee/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
     me() {
