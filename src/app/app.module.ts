@@ -15,6 +15,7 @@ import { routing } from './app.routing';
 
 import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { MaterialComponent } from './material/material.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     AlertComponent,
     UserComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    MaterialComponent
   ],
   imports: [
       BrowserModule,
