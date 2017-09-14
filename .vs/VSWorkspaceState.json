@@ -3,8 +3,9 @@
     "",
     "\\e2e",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\profile"
   ],
-  "SelectedNode": "\\src\\app\\user.ts",
+  "SelectedNode": "\\src\\app\\user",
   "PreviewInSolutionExplorer": false
 }
